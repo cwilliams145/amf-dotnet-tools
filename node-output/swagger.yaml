@@ -1,0 +1,1186 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Node",
+    "version" : "v1.3"
+  },
+  "servers" : [ {
+    "url" : "http://example.api.com/x-nmos/node/{version}",
+    "variables" : {
+      "version" : {
+        "default" : "version"
+      }
+    }
+  } ],
+  "paths" : {
+    "/" : {
+      "get" : {
+        "description" : "List of paths available from this API",
+        "operationId" : "GET_root",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "title" : "Node API base resource",
+                  "maxItems" : 6,
+                  "minItems" : 6,
+                  "uniqueItems" : true,
+                  "type" : "array",
+                  "description" : "Describes the Node API base resource",
+                  "example" : [ "self/", "sources/", "flows/", "devices/", "senders/", "receivers/" ],
+                  "items" : {
+                    "type" : "string",
+                    "enum" : [ "self/", "sources/", "flows/", "devices/", "senders/", "receivers/" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/self" : {
+      "get" : {
+        "description" : "Get information about this Node",
+        "operationId" : "GET_self",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Node"
+                },
+                "example" : {
+                  "version" : "1441700172:318426300",
+                  "hostname" : "host1",
+                  "caps" : { },
+                  "href" : "http://172.29.80.65:12345/",
+                  "api" : {
+                    "versions" : [ "v1.0", "v1.1", "v1.2", "v1.3" ],
+                    "endpoints" : [ {
+                      "host" : "172.29.80.65",
+                      "port" : 12345,
+                      "protocol" : "http"
+                    }, {
+                      "host" : "172.29.80.65",
+                      "port" : 443,
+                      "protocol" : "https",
+                      "authorization" : false
+                    } ]
+                  },
+                  "services" : [ {
+                    "href" : "https://172.29.80.65:443/x-manufacturer/pipelinemanager/",
+                    "authorization" : false,
+                    "type" : "urn:x-manufacturer:service:pipelinemanager"
+                  }, {
+                    "href" : "https://172.29.80.65:443/x-manufacturer/status/",
+                    "authorization" : false,
+                    "type" : "urn:x-manufacturer:service:status"
+                  }, {
+                    "href" : "https://172.29.80.65:443/x-manufacturer/tally/",
+                    "authorization" : false,
+                    "type" : "urn:x-manufacturer:service:tally"
+                  }, {
+                    "href" : "https://172.29.80.65:443/x-manufacturer/mdnsbridge/",
+                    "authorization" : false,
+                    "type" : "urn:x-manufacturer:service:mdnsbridge"
+                  }, {
+                    "href" : "https://172.29.80.65:443/x-manufacturer/storequery/",
+                    "authorization" : false,
+                    "type" : "urn:x-manufacturer:service:storequery"
+                  } ],
+                  "label" : "host1",
+                  "description" : "host1",
+                  "tags" : { },
+                  "id" : "3b8be755-08ff-452b-b217-c9151eb21193",
+                  "clocks" : [ {
+                    "name" : "clk0",
+                    "ref_type" : "internal"
+                  }, {
+                    "name" : "clk1",
+                    "ref_type" : "ptp",
+                    "traceable" : true,
+                    "version" : "IEEE1588-2008",
+                    "gmid" : "08-00-11-ff-fe-21-e1-b0",
+                    "locked" : true
+                  } ],
+                  "interfaces" : [ {
+                    "name" : "eth0",
+                    "chassis_id" : "74-26-96-db-87-31",
+                    "port_id" : "74-26-96-db-87-31",
+                    "attached_network_device" : {
+                      "chassis_id" : "2f-8c-af-79-c7-00",
+                      "port_id" : "Ethernet 1/3"
+                    }
+                  }, {
+                    "name" : "eth1",
+                    "chassis_id" : "74-26-96-db-87-31",
+                    "port_id" : "74-26-96-db-87-32",
+                    "attached_network_device" : {
+                      "chassis_id" : "2d-51-2b-85-89-7b",
+                      "port_id" : "Ethernet 1/2"
+                    }
+                  } ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sources" : {
+      "get" : {
+        "description" : "List Sources",
+        "operationId" : "GET_sources",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Sources"
+                },
+                "example" : [ {
+                  "description" : "Capture Card Source Video",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:video",
+                  "caps" : { },
+                  "version" : "1441703336:902850419",
+                  "parents" : [ ],
+                  "label" : "CaptureCardSourceVideo",
+                  "id" : "4569cea2-ab63-4f97-8dd1-bad4669ea5e4",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk0"
+                }, {
+                  "description" : "Capture Card Source Audio",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:audio",
+                  "caps" : { },
+                  "version" : "1441703336:912670314",
+                  "parents" : [ ],
+                  "label" : "CaptureCardSourceAudio",
+                  "id" : "fc97ab0f-b51b-4129-9385-dcaf30f9482b",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk0",
+                  "channels" : [ {
+                    "label" : "Left Channel",
+                    "symbol" : "L"
+                  }, {
+                    "label" : "Right Channel",
+                    "symbol" : "R"
+                  } ]
+                }, {
+                  "description" : "Capture Card Source Audio",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:audio",
+                  "caps" : { },
+                  "version" : "1441704614:174935325",
+                  "parents" : [ ],
+                  "label" : "CaptureCardSourceAudio",
+                  "id" : "9738780e-141f-4e19-8601-a157dc855aa2",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk0",
+                  "channels" : [ {
+                    "label" : "Left Channel",
+                    "symbol" : "L"
+                  }, {
+                    "label" : "Right Channel",
+                    "symbol" : "R"
+                  } ]
+                }, {
+                  "description" : "Capture Card Source Video",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:video",
+                  "caps" : { },
+                  "version" : "1441704614:163285887",
+                  "parents" : [ ],
+                  "label" : "CaptureCardSourceVideo",
+                  "id" : "02c46999-d532-4c52-905f-2e368a2af6cb",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk0"
+                }, {
+                  "description" : "Capture Card Source VANC",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:data",
+                  "caps" : { },
+                  "version" : "1453880605:374934072",
+                  "parents" : [ ],
+                  "label" : "Capture Card Source VANC",
+                  "id" : "0e635152-e501-4d4e-bb87-9f3fe05eb79a",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk0"
+                }, {
+                  "description" : "Capture Card Source TR-04/2022-6",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:mux",
+                  "caps" : { },
+                  "version" : "1453880605:374934072",
+                  "parents" : [ ],
+                  "label" : "Capture Card Source TR-04/2022-6",
+                  "id" : "782fac41-17f6-4a21-8186-57ba63a1a8d3",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk0"
+                }, {
+                  "description" : "Capture Card Source 2022-6 (No Refclock)",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:mux",
+                  "caps" : { },
+                  "version" : "1453880605:374934072",
+                  "parents" : [ ],
+                  "label" : "Capture Card Source 2022-6 (No Refclock)",
+                  "id" : "3ca37fce-c0cf-42a6-86ad-43635a53b5bb",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5"
+                }, {
+                  "description" : "IS-07 Temperature Readings",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:data",
+                  "event_type" : "number/temperature/*",
+                  "caps" : { },
+                  "version" : "1453880605:374934072",
+                  "parents" : [ ],
+                  "label" : "IS-07 Temperature Readings",
+                  "id" : "33e28c6f-d5ab-4ae5-b00d-f1cccab29af4",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk0"
+                }, {
+                  "description" : "IS-07 Button",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:data",
+                  "event_type" : "boolean",
+                  "caps" : { },
+                  "version" : "1453880605:374934072",
+                  "parents" : [ ],
+                  "label" : "IS-07 Button",
+                  "id" : "c8d27a1d-d124-4d06-bc43-312fd36f7db1",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk0"
+                } ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sources/{sourceId}" : {
+      "get" : {
+        "description" : "Get a single Source",
+        "operationId" : "GET_sources-sourceId",
+        "parameters" : [ {
+          "name" : "sourceId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Source"
+                },
+                "example" : {
+                  "description" : "Capture Card Source Video",
+                  "tags" : {
+                    "host" : [ "host1" ]
+                  },
+                  "format" : "urn:x-nmos:format:video",
+                  "caps" : { },
+                  "version" : "1441703336:902850419",
+                  "parents" : [ ],
+                  "label" : "CaptureCardSourceVideo",
+                  "id" : "4569cea2-ab63-4f97-8dd1-bad4669ea5e4",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "clock_name" : "clk1"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Returned when the requested Source ID does not exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Returned when the requested Source ID exists at a higher API version, and the resource cannot be conformed to the requested API version. The correct API version is identified via the Location header.",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows" : {
+      "get" : {
+        "description" : "List Flows",
+        "operationId" : "GET_flows",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Flows"
+                },
+                "example" : [ {
+                  "description" : "Test Card",
+                  "tags" : { },
+                  "format" : "urn:x-nmos:format:video",
+                  "label" : "Test Card",
+                  "version" : "1441704616:587121295",
+                  "parents" : [ ],
+                  "source_id" : "02c46999-d532-4c52-905f-2e368a2af6cb",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "id" : "5fbec3b1-1b0f-417d-9059-8b94a47197ed",
+                  "media_type" : "video/raw",
+                  "frame_width" : 1920,
+                  "frame_height" : 1080,
+                  "interlace_mode" : "interlaced_tff",
+                  "colorspace" : "BT709",
+                  "components" : [ {
+                    "name" : "Y",
+                    "width" : 1920,
+                    "height" : 1080,
+                    "bit_depth" : 10
+                  }, {
+                    "name" : "Cb",
+                    "width" : 960,
+                    "height" : 1080,
+                    "bit_depth" : 10
+                  }, {
+                    "name" : "Cr",
+                    "width" : 960,
+                    "height" : 1080,
+                    "bit_depth" : 10
+                  } ]
+                }, {
+                  "description" : "VANC Data",
+                  "tags" : { },
+                  "format" : "urn:x-nmos:format:data",
+                  "label" : "VANC Data",
+                  "version" : "1453880607:123995943",
+                  "parents" : [ ],
+                  "source_id" : "0e635152-e501-4d4e-bb87-9f3fe05eb79a",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "id" : "db3bd465-2772-484f-8fac-830b0471258b",
+                  "media_type" : "video/smpte291"
+                }, {
+                  "description" : "TR-04 Video",
+                  "tags" : { },
+                  "format" : "urn:x-nmos:format:mux",
+                  "label" : "TR-04 Video",
+                  "version" : "1453880607:123995943",
+                  "parents" : [ ],
+                  "source_id" : "782fac41-17f6-4a21-8186-57ba63a1a8d3",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "id" : "4857f747-96cf-4ed7-8f4b-9497199f1f25",
+                  "media_type" : "video/SMPTE2022-6"
+                }, {
+                  "description" : "IS-07 Temperature Readings (C)",
+                  "tags" : { },
+                  "format" : "urn:x-nmos:format:data",
+                  "event_type" : "number/temperature/C",
+                  "version" : "1453880605:374934072",
+                  "parents" : [ ],
+                  "label" : "IS-07 Temperature Readings (C)",
+                  "id" : "6327c381-1239-41d1-b314-efc719600e26",
+                  "source_id" : "33e28c6f-d5ab-4ae5-b00d-f1cccab29af4",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "media_type" : "application/json"
+                }, {
+                  "description" : "IS-07 Temperature Readings (F)",
+                  "tags" : { },
+                  "format" : "urn:x-nmos:format:data",
+                  "event_type" : "number/temperature/F",
+                  "version" : "1453880605:374934072",
+                  "parents" : [ ],
+                  "label" : "IS-07 Temperature Readings (F)",
+                  "id" : "6327c381-1239-41d1-b314-efc719600e26",
+                  "source_id" : "33e28c6f-d5ab-4ae5-b00d-f1cccab29af4",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "media_type" : "application/json"
+                }, {
+                  "description" : "IS-07 Button",
+                  "tags" : { },
+                  "format" : "urn:x-nmos:format:data",
+                  "event_type" : "boolean",
+                  "version" : "1453880605:374934072",
+                  "parents" : [ ],
+                  "label" : "IS-07 Button",
+                  "id" : "fa6258b9-2826-4a0d-81d0-7da9edbc405f",
+                  "source_id" : "c8d27a1d-d124-4d06-bc43-312fd36f7db1",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "media_type" : "application/json"
+                } ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/{flowId}" : {
+      "get" : {
+        "description" : "Get a single Flow",
+        "operationId" : "GET_flows-flowId",
+        "parameters" : [ {
+          "name" : "flowId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Flow"
+                },
+                "example" : {
+                  "description" : "Test Card",
+                  "tags" : { },
+                  "format" : "urn:x-nmos:format:video",
+                  "label" : "Test Card",
+                  "version" : "1441704616:587121295",
+                  "parents" : [ ],
+                  "source_id" : "02c46999-d532-4c52-905f-2e368a2af6cb",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "id" : "5fbec3b1-1b0f-417d-9059-8b94a47197ed",
+                  "media_type" : "video/raw",
+                  "frame_width" : 1920,
+                  "frame_height" : 1080,
+                  "interlace_mode" : "interlaced_tff",
+                  "colorspace" : "BT709",
+                  "components" : [ {
+                    "name" : "Y",
+                    "width" : 1920,
+                    "height" : 1080,
+                    "bit_depth" : 10
+                  }, {
+                    "name" : "Cb",
+                    "width" : 960,
+                    "height" : 1080,
+                    "bit_depth" : 10
+                  }, {
+                    "name" : "Cr",
+                    "width" : 960,
+                    "height" : 1080,
+                    "bit_depth" : 10
+                  } ]
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Returned when the requested Flow ID does not exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Returned when the requested Flow ID exists at a higher API version, and the resource cannot be conformed to the requested API version. The correct API version is identified via the Location header.",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices" : {
+      "get" : {
+        "description" : "List Devices",
+        "operationId" : "GET_devices",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Devices"
+                },
+                "example" : [ {
+                  "receivers" : [ ],
+                  "label" : "pipeline 3 default device",
+                  "description" : "pipeline 3 default device",
+                  "tags" : { },
+                  "version" : "1441704616:592733242",
+                  "id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "type" : "urn:x-nmos:device:pipeline",
+                  "senders" : [ "d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e" ],
+                  "node_id" : "3b8be755-08ff-452b-b217-c9151eb21193",
+                  "controls" : [ {
+                    "type" : "urn:x-manufacturer:control:generic",
+                    "href" : "wss://154.67.63.2:4535",
+                    "authorization" : false
+                  } ]
+                }, {
+                  "receivers" : [ ],
+                  "label" : "pipeline 1 default device",
+                  "description" : "pipeline 1 default device",
+                  "tags" : { },
+                  "version" : "1441703338:962976113",
+                  "id" : "67c25159-ce25-4000-a66c-f31fff890265",
+                  "type" : "urn:x-nmos:device:pipeline",
+                  "senders" : [ ],
+                  "node_id" : "3b8be755-08ff-452b-b217-c9151eb21193",
+                  "controls" : [ {
+                    "type" : "urn:x-manufacturer:control:generic",
+                    "href" : "ws://182.54.54.75:223"
+                  }, {
+                    "type" : "urn:x-manufacturer:control:generic",
+                    "href" : "http://134.24.64.22/x-manufacturer/control/"
+                  }, {
+                    "type" : "urn:x-manufacturer:control:legacy",
+                    "href" : "telnet://120.43.64.3:8080"
+                  } ]
+                }, {
+                  "receivers" : [ "1eb53d65-ac83-441c-86f6-9b27df30ef0c" ],
+                  "label" : "pipeline 2 default device",
+                  "description" : "pipeline 2 default device",
+                  "tags" : { },
+                  "version" : "1441704514:993221361",
+                  "id" : "05017e08-b329-45f9-a566-a3f99cc11e4d",
+                  "type" : "urn:x-nmos:device:pipeline",
+                  "senders" : [ ],
+                  "node_id" : "3b8be755-08ff-452b-b217-c9151eb21193",
+                  "controls" : [ ]
+                } ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}" : {
+      "get" : {
+        "description" : "Get a single Device",
+        "operationId" : "GET_devices-deviceId",
+        "parameters" : [ {
+          "name" : "deviceId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Device"
+                },
+                "example" : {
+                  "receivers" : [ ],
+                  "label" : "pipeline 1 default device",
+                  "description" : "pipeline 1 default device",
+                  "tags" : { },
+                  "version" : "1441703338:962976113",
+                  "id" : "67c25159-ce25-4000-a66c-f31fff890265",
+                  "type" : "urn:x-nmos:device:pipeline",
+                  "senders" : [ ],
+                  "node_id" : "3b8be755-08ff-452b-b217-c9151eb21193",
+                  "controls" : [ {
+                    "type" : "urn:x-manufacturer:control:generic",
+                    "href" : "ws://182.54.54.75:223"
+                  }, {
+                    "type" : "urn:x-manufacturer:control:generic",
+                    "href" : "http://134.24.64.22/x-manufacturer/control/"
+                  }, {
+                    "type" : "urn:x-manufacturer:control:legacy",
+                    "href" : "telnet://120.43.64.3:8080"
+                  } ]
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Returned when the requested Device ID does not exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Returned when the requested Device ID exists at a higher API version, and the resource cannot be conformed to the requested API version. The correct API version is identified via the Location header.",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/senders" : {
+      "get" : {
+        "description" : "List Senders",
+        "operationId" : "GET_senders",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Senders"
+                },
+                "example" : [ {
+                  "description" : "Test Card",
+                  "label" : "Test Card",
+                  "version" : "1441704616:890020555",
+                  "manifest_href" : "http://172.29.80.65/x-manufacturer/senders/d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e/stream.sdp",
+                  "flow_id" : "5fbec3b1-1b0f-417d-9059-8b94a47197ed",
+                  "id" : "d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e",
+                  "transport" : "urn:x-nmos:transport:rtp.mcast",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "interface_bindings" : [ "eth0", "eth1" ],
+                  "caps" : { },
+                  "tags" : { },
+                  "subscription" : {
+                    "active" : true
+                  }
+                } ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/senders/{senderId}" : {
+      "get" : {
+        "description" : "Get a single Sender",
+        "operationId" : "GET_senders-senderId",
+        "parameters" : [ {
+          "name" : "senderId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Sender"
+                },
+                "example" : {
+                  "description" : "Test Card",
+                  "label" : "Test Card",
+                  "version" : "1441704616:890020555",
+                  "manifest_href" : "http://172.29.80.65/x-manufacturer/senders/d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e/stream.sdp",
+                  "flow_id" : "5fbec3b1-1b0f-417d-9059-8b94a47197ed",
+                  "id" : "d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e",
+                  "transport" : "urn:x-nmos:transport:rtp.mcast",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "interface_bindings" : [ "eth0", "eth1" ],
+                  "caps" : { },
+                  "tags" : { },
+                  "subscription" : {
+                    "active" : true
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Returned when the requested Sender ID does not exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Returned when the requested Sender ID exists at a higher API version, and the resource cannot be conformed to the requested API version. The correct API version is identified via the Location header.",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receivers" : {
+      "get" : {
+        "description" : "List Receivers",
+        "operationId" : "GET_receivers",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Receivers"
+                },
+                "example" : [ {
+                  "description" : "",
+                  "format" : "urn:x-nmos:format:video",
+                  "tags" : { },
+                  "caps" : {
+                    "media_types" : [ "video/raw" ]
+                  },
+                  "subscription" : {
+                    "sender_id" : "2683ad14-642f-459d-a169-ef91c76cec6b",
+                    "active" : true
+                  },
+                  "version" : "1441704532:450093308",
+                  "label" : "RTPRx",
+                  "id" : "1eb53d65-ac83-441c-86f6-9b27df30ef0c",
+                  "transport" : "urn:x-nmos:transport:rtp",
+                  "interface_bindings" : [ "eth0", "eth1" ],
+                  "device_id" : "05017e08-b329-45f9-a566-a3f99cc11e4d"
+                }, {
+                  "description" : "",
+                  "format" : "urn:x-nmos:format:data",
+                  "tags" : { },
+                  "caps" : {
+                    "media_types" : [ "application/json" ],
+                    "event_types" : [ "number/temperature/*", "boolean" ]
+                  },
+                  "subscription" : {
+                    "active" : false
+                  },
+                  "version" : "1441704532:450093308",
+                  "label" : "IS-07 Mixed RTPRx",
+                  "id" : "9503a7ab-cc49-4b6a-a5a3-d0d0ca5c9671",
+                  "transport" : "urn:x-nmos:transport:mqtt",
+                  "interface_bindings" : [ "eth0" ],
+                  "device_id" : "05017e08-b329-45f9-a566-a3f99cc11e4d"
+                } ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receivers/{receiverId}" : {
+      "get" : {
+        "description" : "Get a single Receiver",
+        "operationId" : "GET_receivers-receiverId",
+        "parameters" : [ {
+          "name" : "receiverId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Receiver"
+                },
+                "example" : {
+                  "description" : "",
+                  "format" : "urn:x-nmos:format:video",
+                  "tags" : { },
+                  "caps" : {
+                    "media_types" : [ "video/raw" ]
+                  },
+                  "subscription" : {
+                    "sender_id" : "2683ad14-642f-459d-a169-ef91c76cec6b",
+                    "active" : true
+                  },
+                  "version" : "1441704532:450093308",
+                  "label" : "RTPRx",
+                  "id" : "1eb53d65-ac83-441c-86f6-9b27df30ef0c",
+                  "transport" : "urn:x-nmos:transport:rtp",
+                  "interface_bindings" : [ "eth0", "eth1" ],
+                  "device_id" : "05017e08-b329-45f9-a566-a3f99cc11e4d"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Returned when the requested Receiver ID does not exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Returned when the requested Receiver ID exists at a higher API version, and the resource cannot be conformed to the requested API version. The correct API version is identified via the Location header.",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receivers/{receiverId}/target" : {
+      "put" : {
+        "description" : "Request a change to a Receiver's subscription (deprecated)",
+        "operationId" : "PUT_receivers-receiverId-target",
+        "parameters" : [ {
+          "name" : "receiverId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReceiverTarget"
+              },
+              "example" : {
+                "description" : "Test Card",
+                "label" : "Test Card",
+                "version" : "1441704616:890020555",
+                "manifest_href" : "http://172.29.80.65/x-manufacturer/senders/d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e/stream.sdp",
+                "flow_id" : "5fbec3b1-1b0f-417d-9059-8b94a47197ed",
+                "id" : "d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e",
+                "transport" : "urn:x-nmos:transport:rtp.mcast",
+                "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                "interface_bindings" : [ "eth0", "eth1" ],
+                "caps" : { },
+                "tags" : { },
+                "subscription" : {
+                  "active" : true
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ReceiverTarget"
+                },
+                "example" : {
+                  "description" : "Test Card",
+                  "label" : "Test Card",
+                  "version" : "1441704616:890020555",
+                  "manifest_href" : "http://172.29.80.65/x-manufacturer/senders/d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e/stream.sdp",
+                  "flow_id" : "5fbec3b1-1b0f-417d-9059-8b94a47197ed",
+                  "id" : "d7aa5a30-681d-4e72-92fb-f0ba0f6f4c3e",
+                  "transport" : "urn:x-nmos:transport:rtp.mcast",
+                  "device_id" : "9126cc2f-4c26-4c9b-a6cd-93c4381c9be5",
+                  "interface_bindings" : [ "eth0", "eth1" ],
+                  "caps" : { },
+                  "tags" : { },
+                  "subscription" : {
+                    "active" : true
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Returned when the PUT request is incorrectly formatted or missing mandatory attributes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Returned when the requested Receiver ID does not exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Returned when the requested Receiver ID exists at a higher API version, and the resource cannot be conformed to the requested API version. The correct API version is identified via the Location header.",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          },
+          "501" : {
+            "description" : "This feature has not been implemented due to deprecation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorSchema"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options" : {
+        "description" : "A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes",
+        "operationId" : "OPTIONS_receivers-receiverId-target",
+        "parameters" : [ {
+          "name" : "receiverId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : { },
+          "403" : { }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Node" : {
+        "title" : "Node resource",
+        "type" : "object",
+        "description" : "Describes the Node and the services which run on it"
+      },
+      "Nodes" : {
+        "title" : "Collection of Nodes",
+        "uniqueItems" : true,
+        "type" : "array",
+        "description" : "A list of Node resources",
+        "items" : {
+          "$ref" : "#/components/schemas/Node"
+        }
+      },
+      "Device" : {
+        "title" : "Device resource",
+        "type" : "object",
+        "description" : "Describes a Device"
+      },
+      "Devices" : {
+        "title" : "Collection of Devices",
+        "uniqueItems" : true,
+        "type" : "array",
+        "description" : "A list of Device resources",
+        "items" : {
+          "$ref" : "./device.json"
+        }
+      },
+      "Source" : {
+        "title" : "Source resource",
+        "type" : "object",
+        "description" : "Describes a Source"
+      },
+      "Sources" : {
+        "title" : "Collection of Sources",
+        "uniqueItems" : true,
+        "type" : "array",
+        "description" : "A list of Source resources",
+        "items" : {
+          "$ref" : "./source.json"
+        }
+      },
+      "Flow" : {
+        "title" : "Flow resource",
+        "type" : "object",
+        "description" : "Describes a Flow"
+      },
+      "Flows" : {
+        "title" : "Collection of Flows",
+        "uniqueItems" : true,
+        "type" : "array",
+        "description" : "A list of Flow resources",
+        "items" : {
+          "$ref" : "./flow.json"
+        }
+      },
+      "Sender" : {
+        "title" : "Sender resource",
+        "type" : "object",
+        "description" : "Describes a sender"
+      },
+      "Senders" : {
+        "title" : "Collection of Senders",
+        "uniqueItems" : true,
+        "type" : "array",
+        "description" : "A list of Sender resources",
+        "items" : {
+          "$ref" : "./sender.json"
+        }
+      },
+      "Receiver" : {
+        "title" : "Receiver resource",
+        "type" : "object",
+        "description" : "Describes a Receiver"
+      },
+      "ReceiverTarget" : {
+        "title" : "Receiver target resource",
+        "type" : "object",
+        "description" : "Describes the possible requests to a Node's Receiver target resource"
+      },
+      "Receivers" : {
+        "title" : "Collection of Receivers",
+        "uniqueItems" : true,
+        "type" : "array",
+        "description" : "A list of Receiver resources",
+        "items" : {
+          "$ref" : "./receiver.json"
+        }
+      },
+      "ErrorSchema" : {
+        "title" : "Error response",
+        "required" : [ "code", "debug", "error" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "maximum" : 599,
+            "minimum" : 400,
+            "type" : "integer",
+            "description" : "HTTP error code"
+          },
+          "error" : {
+            "type" : "string",
+            "description" : "Human readable message which is suitable for user interface display, and helpful to the user"
+          },
+          "debug" : {
+            "type" : "string",
+            "description" : "Debug information which may assist a programmer working with the API"
+          }
+        },
+        "description" : "Describes the standard error response which is returned with HTTP codes 400 and above"
+      }
+    },
+    "responses" : { },
+    "parameters" : { },
+    "examples" : { },
+    "requestBodies" : { },
+    "headers" : { },
+    "securitySchemes" : { },
+    "links" : { },
+    "callbacks" : { }
+  }
+}
