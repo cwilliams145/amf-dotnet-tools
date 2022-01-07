@@ -5,10 +5,14 @@
     "version" : "v1.3"
   },
   "servers" : [ {
-    "url" : "http://example.api.com/x-nmos/node/{version}",
+    "url" : "{baseUrl}/x-nmos/node/{version}",
     "variables" : {
       "version" : {
-        "default" : "version"
+        "default" : "v1.3"
+      },
+      "baseUrl" : {
+        "description" : "vm",
+        "default" : "http://10.11.7.250"
       }
     }
   } ],
